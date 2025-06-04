@@ -1,0 +1,98 @@
+body {
+  background-image: ('background.png');
+}
+
+h1 {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  color: #8c52ee;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h2 {
+  font-size: x-large;
+  font-weight: bold;
+  text-align: center;
+  color: #cc6ce2;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h3 {
+  font-size: medium;
+  text-align: center;
+  color: #cc6ce2;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+p {
+  font-size: small;
+  text-align: center;
+  color: black;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+article {
+  background-color: #ffbd59;
+  padding: 0px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.button {
+  width: 20%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: #ff914d;
+  padding: 30px;
+  flex: 1;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.button:hover {
+  background-color: #ffbd59;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+    0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.lines {
+  width: 45px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: #ff914d;
+  flex: none;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.lines:hover {
+  background-color: #ffbd59;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+    0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
+    0 6px 20px 0 rgba(0,0,0,0.39);
+  background: #c1ff72;
+  margin-bottom: 5%;
+  padding: 2%;
+  overflow: auto;
+  resize: both;
+  text-overflow: ellipsis;
+}
+
+.card:hover {
+  background: #ffde59;
+}
+
+.submit_form {
+  text-align: center;
+  padding: 3%;
+  background: #5ce1e6;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
+    0 6px 20px 0 rgba(0,0,0,0.36);
+}

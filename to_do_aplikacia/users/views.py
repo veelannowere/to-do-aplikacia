@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
 from .forms import LoginForm, RegisterForm
 
 
@@ -8,7 +9,7 @@ def sign_in(request):
 
     if request.method == 'GET':
         if request.user.is_authenticated:
-            return redirect('ulohy')
+            return redirect('todo')  # Changed from 'ulohy' to 'todo'
         
         form = LoginForm()
         return render(request,'users/login.html', {'form': form})
@@ -23,7 +24,7 @@ def sign_in(request):
             if user:
                 login(request, user)
                 messages.success(request,f'Hi {username.title()}, welcome back!')
-                return redirect('ulohy')
+                return redirect('todo')  # Redirect to todo page after login
         
         # either form not valid or user is not authenticated
         messages.error(request,f'Invalid username or password')
@@ -48,6 +49,17 @@ def sign_up(request):
             user.save()
             messages.success(request, 'You have singed up successfully.')
             login(request, user)
-            return redirect('posts')
+            return redirect('login')  # Redirect to login page after registration
         else:
             return render(request, 'users/register.html', {'form': form})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account created successfully!')
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'users/register.html', {'form': form})
