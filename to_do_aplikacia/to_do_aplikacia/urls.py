@@ -27,5 +27,6 @@ urlpatterns = [
     path('del/<str:item_id>', views.remove, name="del"),
     path('admin/', admin.site.urls),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('edit/<str:item_id>', views.edit, name="edit"),
 ]
 

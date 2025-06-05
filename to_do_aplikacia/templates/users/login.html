@@ -1,9 +1,11 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Prihlásenie</title>
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
         body {
             background-image: url("{% static 'background.png' %}");
@@ -21,6 +23,13 @@
     </style>
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+        <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
     <div class="auth-form">
         <h2>PRIHLÁSENIE</h2>
         <form method="POST">
@@ -32,5 +41,12 @@
             <a href="{% url 'register' %}" style="color: #8c52ee; text-decoration: none;">Nemáte ešte účet?</a>
         </p>
     </div>
+    <script>
+        setTimeout(function() {
+            $('.alert').fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }, 5000);
+    </script>
 </body>
 </html>

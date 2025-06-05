@@ -33,7 +33,7 @@ def sign_in(request):
 
 def sign_out(request):
     logout(request)
-    messages.success(request,f'You have been logged out.')
+    request.session['logout_message'] = 'You have been logged out.'  # Store message in session
     return redirect('login')      
 
 def sign_up(request):
