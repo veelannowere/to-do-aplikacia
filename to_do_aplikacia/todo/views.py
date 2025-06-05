@@ -6,6 +6,8 @@ from .forms import TodoForm
 from .models import Todo
 
 def index(request):
+
+    item_list = Todo.objects.order_by("-date")
     if request.method == "POST":
         form = TodoForm(request.POST)
         if form.is_valid():
@@ -50,14 +52,3 @@ def login_view(request):
         auth_login(request, user)
         return redirect('todo')
     # ...existing code...
-
-def edit(request, item_id):
-    todo = get_object_or_404(Todo, id=item_id)
-    if request.method == "POST":
-        form = TodoForm(request.POST, instance=todo)
-        if form.is_valid():
-            form.save()
-            return redirect('todo')
-    else:
-        form = TodoForm(instance=todo)
-    return render(request, 'todo/edit.html', {'form': form, 'todo': todo})
