@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 
@@ -6,7 +6,8 @@ from .forms import TodoForm
 from .models import Todo
 
 def index(request):
-
+    if not request.user.is_authenticated:  # Opravená kontrola
+        return redirect("/user/login")
     item_list = Todo.objects.order_by("-date")
     if request.method == "POST":
         form = TodoForm(request.POST)
@@ -36,3 +37,16 @@ def login_view(request):
         auth_login(request, user)
         return redirect('todo')
     # ...existing code...
+
+def edit_task(request, task_id):
+    task = get_object_or_404(Todo, id=task_id)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Task updated successfully!")
+            return redirect('todo')
+    else:
+        form = TodoForm(instance=task)
+
+    return render(request, 'todo/edit_task.html', {'form': form, 'task': task})
