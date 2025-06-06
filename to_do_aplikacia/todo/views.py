@@ -1,20 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
+from .models import Task, Todo
+from .forms import TaskForm
+from django.db import models
 
-from .forms import TodoForm
-from .models import Todo
 
 def index(request):
-
-    item_list = Todo.objects.order_by("-date")
     if request.method == "POST":
-        form = TodoForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Task added successfully!")
             return redirect('todo')
-    form = TodoForm()
-
+    else:
+        form = TaskForm()
+    
     # Get current sort direction from session or set default
     sort_direction = request.session.get('sort_direction', 'desc')
     
@@ -52,3 +53,18 @@ def login_view(request):
         auth_login(request, user)
         return redirect('todo')
     # ...existing code...
+def edit(request, item_id):
+    task = get_object_or_404(Todo, id=item_id)
+    
+    if request.method == 'POST':
+        task.title = request.POST.get('title')
+        task.details = request.POST.get('details')
+        task.date = request.POST.get('date')
+        task.save()
+        return redirect('todo')
+    else:
+        form = TaskForm(instance=task)
+    
+    context = {'form': form, 'task': task}
+    return render(request, 'todo/edit_task.html', context)
+

@@ -19,14 +19,14 @@ from .views import home
 from todo import views
 from django.contrib.auth import views as auth_views
 
-from todo.views import edit_task
+from todo.views import edit
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('users.urls')),
     path('',  home, name='home'),
     path('todo/', views.index, name='todo'),
     path('del/<str:item_id>', views.remove, name="del"),
-    path('edit/<int:task_id>/', edit_task, name='edit_task'),
+    path('edit/<int:task_id>/', edit, name='edit_task'),
     path('admin/', admin.site.urls),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('edit/<str:item_id>', views.edit, name="edit"),

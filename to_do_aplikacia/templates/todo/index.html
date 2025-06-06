@@ -194,13 +194,6 @@
 <br>
 <br>
 
-  <div class="row">
-    <div class="col-md-12 text-center" style="margin-bottom: 20px;">
-      <form action="/sort_by_date" method="GET">
-        <button type="submit" class="btn btn-primary">Zoradiť úlohy podľa dátumu</button>
-      </form>
-    </div>
-  </div>
 
   <div class="row">
 
@@ -223,9 +216,6 @@
           <button value="remove" type="submit" class="button" style="float: right;">
             <span class="glyphicon glyphicon-trash"></span> &nbsp; remove
           </button>
-        </form>
-        <form action="/edit/{{i.id}}" method="GET" style=" padding-right: 4%; padding-bottom: 3%;">
-          <button value="edit" type="submit"  class="button" style="float: left;"><span class="glyphicon glyphicon-edit"></span> &nbsp; edit</button>
         </form>
       </div>
       {% endfor%}
