@@ -8,10 +8,6 @@ from .forms import LoginForm, RegisterForm
 def sign_in(request):
     print("sign_in called with method:", request.method)  # Debug print
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            print("User is already authenticated")  # Debug print
-            return redirect('todo')  # Changed from 'ulohy' to 'todo'
-        
         form = LoginForm()
         return render(request,'users/login.html', {'form': form})
 
@@ -72,6 +68,10 @@ def register(request):
             print("Form is valid, user created")
             messages.success(request, 'Account created successfully!')
             return redirect('login')
+        else:
+            form = UserCreationForm()
+            return render(request, 'users/register.html', {'form': form})
+            return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'users/register.html', {'form': form})
+        return render(request, 'users/register.html', {'form': form})

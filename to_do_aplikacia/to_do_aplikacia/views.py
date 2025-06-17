@@ -4,5 +4,5 @@ from django.contrib import messages
 
 
 def home(request):
-    return redirect('todo')  # Redirect to the 'todo' view
+    return redirect('login')  # Redirect to the 'todo' view
        # return render(request,'todo/index.html')

@@ -4,8 +4,10 @@ from django.contrib.auth import login as auth_login
 from .models import Task, Todo
 from .forms import TaskForm
 from django.db import models
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 def index(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
@@ -39,6 +41,7 @@ def index(request):
     }
     return render(request, 'todo/index.html', page)
 
+@login_required(login_url='login')
 def remove(request, item_id):
     item = Todo.objects.get(id=item_id)
     item.delete()
@@ -53,6 +56,8 @@ def login_view(request):
         auth_login(request, user)
         return redirect('todo')
     # ...existing code...
+
+@login_required(login_url='login')
 def edit(request, item_id):
     task = get_object_or_404(Todo, id=item_id)
     
